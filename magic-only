@@ -1,0 +1,79 @@
+let player1 = [
+    {Name:"harry Potter", Magic:55, WandSize:10, Cunning:30, Skill:70}, 
+    {Name:"peter Pettigrew", Magic:45, WandSize:9, Cunning:20, Skill:50},
+    {Name:"remus Lupin", Magic: 56, WandSize:3, Cunning:60, Skill:30},
+    {Name:"albus Dumbledore", Magic:96, WandSize:7, Cunning:30, Skill:23}, 
+    {Name:"terry Boot", Magic:15, WandSize:9, Cunning:10, Skill:3},
+    {Name:"sirius Black", Magic:65, WandSize:7, Cunning:90, Skill:87},
+    {Name:"michael Corner", Magic:11, WandSize:3, Cunning:50, Skill:34},
+    {Name:"lucius Malfoy", Magic:35, WandSize:6, Cunning:40, Skill:98},
+    {Name:"draco Malfoy", Magic:15, WandSize:1, Cunning:60, Skill:12},
+    {Name:"quirinus Quirrell", Magic:65, WandSize:9, Cunning:70, Skill:62},
+    {Name:"augustus Rookwood", Magic:83, WandSize:2, Cunning:10, Skill:38},
+    {Name:"thorfinn Rowle", Magic:22, WandSize:6, Cunning:20, Skill:83}, 
+    {Name:"newt Scamander", Magic:98, WandSize:9, Cunning:10, Skill:9}, 
+    {Name:"delores Umbridge", Magic:3, WandSize:0, Cunning:80, Skill:2},
+    {Name:"fred Weasley", Magic:67, WandSize:10, Cunning:30, Skill:11}
+];
+let player2 = [
+    {Name:"myrtle Warren", Magic:1, WandSize:2, Cunning:10, Skill:12},
+    {Name:"Ted Tonks", Magic:0, WandSize:1, Cunning:30, Skill:34}, 
+    {Name:"rita Skeeter", Magic:2, WandSize:3, Cunning:50, Skill:73}, 
+    {Name:"severus Snape", Magic:89, WandSize:6, Cunning:70, Skill:23},
+    {Name:"lord Voldemort", Magic:14, WandSize:8, Cunning:20, Skill:92}, 
+    {Name:"rebeus Hagrid", Magic:10, WandSize:4, Cunning:60, Skill:17},
+    {Name:"lee Jordan", Magic:70, WandSize:3, Cunning:40, Skill:28},
+    {Name:"viktor Krum", Magic:43, WandSize:8, Cunning:10, Skill:88},
+    {Name:"hermione Granger", Magic:7, WandSize:2, Cunning:90, Skill:66},
+    {Name:"filius Flitwick", Magic:85, WandSize:1, Cunning:70, Skill:5}, 
+    {Name:"fenrir Greyback", Magic:67, WandSize:0, Cunning:20, Skill:100}, 
+    {Name:"morfin Gaunt", Magic:18, WandSize:3, Cunning:40, Skill:65}, 
+    {Name:"goyle", Magic:52, WandSize:8, Cunning:50, Skill:6},
+    {Name:"vernonDursley", Magic:2, WandSize:1, Cunning:20, Skill:43}, 
+    {Name:"amelia Bones", Magic:60, WandSize:10, Cunning:70, Skill:57}
+];
+let limbo = [];
+let round = 0;
+
+while ( player1.length < 30 && player2.length < 30){
+    round++;
+    let hand1 = player1.slice(0,1);
+    let hand2 = player2.slice(0,1);
+    player1.shift();
+    player2.shift();
+    // console.log(hand1);
+    // console.log(hand2);
+    let play = () => {
+        if (hand1[0].Magic > hand2[0].Magic)  {
+            if(limbo.length >= 0) {
+                player1.push(limbo[0], limbo[1]);
+                
+            }
+            //console.log(limbo);
+            //player1.push(player2[0]);
+            player1.push(hand2,hand1);
+                console.log("Player 1 wins this round " + round + ", has " + player1.length + " cards");
+           
+        } 
+        else if (hand1[0].Magic < hand2[0].Magic) {
+            if(limbo.length >= 0) {
+                player2.push(limbo[0], limbo[1]) ;
+              
+            }
+            player2.push(hand1, hand2);
+            console.log("Player 2 wins this round " + round + ", has " + player2.length + " cards");
+           
+        } 
+        else if (hand1[0].Magic == hand2[0].Magic) {
+            limbo.push(hand1[0], hand2[0]);
+            console.log("we have a draw");
+          
+        } 
+        if (player1.length === 30) {
+            console.log("Player 1 wins the game");
+        } else if (player2.length === 30) {
+            console.log("Player 2 wins the game")
+        }  
+    }
+    play();
+}
